@@ -1,3 +1,4 @@
-# disent_qa
+# DisentQA: Disentangling Parametric and Contextual Knowledge\\ with Counterfactual Question Answering}
 
-The code will be come availabe soon.
+
+The code will become availabe soon.
