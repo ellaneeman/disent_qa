@@ -1,0 +1,30 @@
+{
+  "prepare_data": {
+    "train_path": "data/natural_questions/v1.0-simplified_simplified-nq-train.jsonl.gz",
+    "dev_path": "data/natural_questions/simplified-nq-dev.jsonl.gz",
+    "counterfactual_path_pattern": "../ml-knowledge-conflicts/datasets/substitution-sets/NaturalQuestions{}_{}.jsonl"
+  },
+  "query_model": {
+    
+    "results_dir": "",
+    "model_name": "t5-small",
+
+    "input_max_length": 396,
+    "output_max_length": 80,
+    "repetition_penalty": 2.5,
+    "length_penalty": 1.0,
+    "num_beams": 1,
+    "batch_size": 128
+  },
+  "fine_tune": {
+    "checkpoints_dirpath": "",
+    "wandb_api_key": "",
+    "model_name": "t5-small",
+
+    "batch_size": 128,
+    "learning_rate": 0.0001,
+    "N_EPOCHS": 20,
+    "source_max_token_len": 256,
+    "target_max_token_len": 32
+  }
+}
