@@ -1,8 +1,7 @@
-
 # DisentQA: Disentangling Parametric and Contextual Knowledge with Counterfactual Question Answering
 
-This code accompanies the paper "DisentQA: Disentangling Parametric and Contextual Knowledge with Counterfactual
-Question Answering". Our approach proposes to disentangle two sources of knowledge available to QA models:
+This code accompanies the paper [DisentQA: Disentangling Parametric and Contextual Knowledge with Counterfactual
+Question Answering](https://arxiv.org/pdf/2211.05655.pdf). Our approach proposes to disentangle two sources of knowledge available to QA models:
 (1) parametric knowledge – the factual knowledge encoded in the model weights, and (2) contextual knowledge – external
 knowledge (e.g., a Wikipedia passage) given to the model to generate a grounded answer. Using counterfactual data
 augmentation, we introduce a model that predicts two answers for a given question, one per each source of knowledge.
@@ -13,11 +12,9 @@ augmentation, we introduce a model that predicts two answers for a given questio
 * [Prerequisites](#prerequisites)
 * [Usage](#usage)
 * [Citation](#citation)
-
 <!-- TOC -->
 
 ## Datasets
-
 The datasets produced by the `prepare_data.py` script are available in
 this [document](https://docs.google.com/document/d/1Z4vA7ifMQTk5YBF3BEYCFSnIvXCYaznLP_7VBcXPEeU/edit?usp=sharing), which
 contains links to the data files and their description, according to Table 3 in the paper:
@@ -126,7 +123,7 @@ This is the basic flow of the project:
 
 - [run_nq_fine_tuning.py](run_nq_fine_tuning.py) fine-tunes a T5 model based on the implementation
   from [this notebook](https://colab.research.google.com/drive/1WXLtGQmYyrMi484ox9R5ZkJe_4Vm3fny). Saves the checkpoints
-  to the `checkpoints_dirpath` specified in the [config.json](config.json) file, under the `fine_tune` key. 
+  to the `checkpoints_dirpath` specified in the [config.json](config.json) file, under the `fine_tune` key.
   ```commandline
   python run_nq_fine_tuning.py --path data/<path prefix for train/val data>
   ```
@@ -141,26 +138,51 @@ This is the basic flow of the project:
   ```commandline
    python evaluate.py --path <path to query_model output file with all answer types>.csv
   ```
+- [config.json](config.json) holds all the necessary configuration fields (per script), as shown below. Fill
+  in paths and api keys.
+  ```commandline
+  {
+    "prepare_data": {
+      "train_path":
+      "dev_path": 
+      "counterfactual_path_pattern": 
+    },
+
+    "fine_tune": {
+      "checkpoints_dirpath": "",
+      "wandb_api_key": "",
+      "model_name": "t5-small",
+      ...
+    },
+
+    "query_model": {
+      "results_dir": "",
+      "model_name": "t5-small",
+      ...
+    }
+  } 
+    ```
 
 ## Citation
-
-```
-@misc{https://doi.org/10.48550/arxiv.2211.05655,
-  title = {DisentQA: Disentangling Parametric and Contextual Knowledge with Counterfactual Question Answering},
-  author = {Neeman, Ella and
-            Aharoni, Roee and
-            Honovich, Or and
-            Choshen, Leshem and
-            Szpektor, Idan and
-            Abend, Omri},
-  keywords = {Computation and Language (cs.CL), Artificial Intelligence (cs.AI), Machine Learning (cs.LG), FOS: Computer and information sciences, FOS: Computer and information sciences},
-  publisher = {arXiv},
-  year = {2022},
-  copyright = {Creative Commons Attribution 4.0 International},
-  doi = {10.48550/ARXIV.2211.05655},
-  url = {https://arxiv.org/abs/2211.05655}
-}
-```
+If you make use of this code or data, please cite the following paper:
+  ```
+    @misc{https://doi.org/10.48550/arxiv.2211.05655,
+    title = {DisentQA: Disentangling Parametric and Contextual Knowledge with Counterfactual Question Answering},
+    author = {Neeman, Ella and
+    Aharoni, Roee and
+    Honovich, Or and
+    Choshen, Leshem and
+    Szpektor, Idan and
+    Abend, Omri},
+    keywords = {Computation and Language (cs.CL), Artificial Intelligence (cs.AI), Machine Learning (cs.LG), FOS: Computer
+    and information sciences, FOS: Computer and information sciences},
+    publisher = {arXiv},
+    year = {2022},
+    copyright = {Creative Commons Attribution 4.0 International},
+    doi = {10.48550/ARXIV.2211.05655},
+    url = {https://arxiv.org/abs/2211.05655}
+    }
+  ```
 
 
 
